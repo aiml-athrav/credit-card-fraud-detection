@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fraudshield_backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/storage:/app/storage
+    environment:
+      - SECRET_KEY=CREDIT_CARD_FRAUD_SYSTEM_JWT_SECRET_SIGNING_KEY_2026_522
+      - ACCESS_TOKEN_EXPIRE_MINUTES=1440
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: fraudshield_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: always
