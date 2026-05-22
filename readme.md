@@ -34,42 +34,18 @@ FraudShield demonstrates how AI can:
 
 ### 🔷 High-Level Flow
 
-```mermaid
-flowchart LR
-A[User] --> B[React Frontend]
-B --> C[FastAPI Backend]
-C --> D[Authentication Layer (JWT)]
-C --> E[ML Fraud Detection Model]
-E --> F[Decision Engine]
-F --> G[SQLite Database]
-G --> B
-```
+![Architecture](./assets/imgs/architecture.png)
 
 ---
 
-## 🔄 System Workflow
+### 🔷 Architecture Breakdown
 
-```
-User Login
-   ↓
-JWT Authentication
-   ↓
-Transaction Input (Frontend)
-   ↓
-API Request (FastAPI)
-   ↓
-Feature Processing
-   ↓
-ML Model Prediction
-   ↓
-Risk Scoring Engine
-   ↓
-Decision (APPROVE / REVIEW / BLOCK)
-   ↓
-Store in Database
-   ↓
-Update Dashboard UI
-```
+| Layer        | Responsibility                     |
+| ------------ | ---------------------------------- |
+| 🎨 Frontend  | User dashboard + transaction input |
+| ⚙️ Backend   | API + business logic               |
+| 🤖 ML Model  | Fraud prediction engine            |
+| 🗄️ Database | Stores users + transactions        |
 
 ---
 
@@ -85,45 +61,9 @@ Update Dashboard UI
 
 ---
 
-## 🧰 Technology Stack
-
-### 🎨 Frontend
-
-* React (Vite)
-* Tailwind CSS
-* Axios
-* Recharts
+## 📦 Installation
 
 ### ⚙️ Backend
-
-* FastAPI
-* Python
-* SQLAlchemy
-* Pydantic
-* JWT Authentication
-
-### 🤖 Machine Learning
-
-* Scikit-learn
-* XGBoost / Random Forest
-* Pandas
-* NumPy
-
-### 🗄️ Database
-
-* SQLite
-
-### 🛠️ Tools
-
-* Docker (optional)
-* Postman
-* Git & GitHub
-
----
-
-## 📦 Installation Guide
-
-### ⚙️ Backend Setup
 
 ```bash
 cd backend
@@ -143,19 +83,27 @@ npm run dev
 
 ## 👤 Demo Credentials
 
-### Admin
+| Role  | Username | Password |
+| ----- | -------- | -------- |
+| Admin | admin    | admin123 |
+| User  | user     | user123  |
 
-```
-Username: admin
-Password: admin123
-```
+---
 
-### User
+## 📸 UI PREVIEW
 
-```
-Username: user
-Password: user123
-```
+
+### 🔐 Login Page
+
+![Login](./assets/imgs/signin.png)
+
+### 📊 Dashboard
+
+![Dashboard](./assets/imgs/dashboard.png)
+
+### 📈 Prediction View
+
+![Prediction](./assets/imgs/pred1.png)
 
 ---
 
