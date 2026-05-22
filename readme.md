@@ -36,50 +36,39 @@ FraudShield demonstrates how AI can:
 
 ```mermaid
 flowchart LR
-U[User] --> F[React Frontend]
-F --> B[FastAPI Backend]
-B --> A[Auth Layer (JWT)]
-B --> M[ML Model Engine]
-M --> D[Decision Engine]
-D --> DB[SQLite Database]
-DB --> F
-````
-
----
-
-### 🔷 Architecture Breakdown
-
-| Layer        | Responsibility                     |
-| ------------ | ---------------------------------- |
-| 🎨 Frontend  | User dashboard + transaction input |
-| ⚙️ Backend   | API + business logic               |
-| 🤖 ML Model  | Fraud prediction engine            |
-| 🗄️ Database | Stores users + transactions        |
+A[User] --> B[React Frontend]
+B --> C[FastAPI Backend]
+C --> D[Authentication Layer (JWT)]
+C --> E[ML Fraud Detection Model]
+E --> F[Decision Engine]
+F --> G[SQLite Database]
+G --> B
+```
 
 ---
 
 ## 🔄 System Workflow
 
-```text
-Login
-  ↓
+```
+User Login
+   ↓
 JWT Authentication
-  ↓
-Enter Transaction
-  ↓
+   ↓
+Transaction Input (Frontend)
+   ↓
 API Request (FastAPI)
-  ↓
+   ↓
 Feature Processing
-  ↓
-ML Prediction
-  ↓
+   ↓
+ML Model Prediction
+   ↓
 Risk Scoring Engine
-  ↓
-Decision Output
-  ↓
-Database Storage
-  ↓
-UI Update
+   ↓
+Decision (APPROVE / REVIEW / BLOCK)
+   ↓
+Store in Database
+   ↓
+Update Dashboard UI
 ```
 
 ---
@@ -96,7 +85,7 @@ UI Update
 
 ---
 
-## 🧰 Tech Stack
+## 🧰 Technology Stack
 
 ### 🎨 Frontend
 
@@ -110,23 +99,31 @@ UI Update
 * FastAPI
 * Python
 * SQLAlchemy
-* JWT Auth
+* Pydantic
+* JWT Authentication
 
 ### 🤖 Machine Learning
 
 * Scikit-learn
 * XGBoost / Random Forest
-* NumPy / Pandas
+* Pandas
+* NumPy
 
 ### 🗄️ Database
 
 * SQLite
 
+### 🛠️ Tools
+
+* Docker (optional)
+* Postman
+* Git & GitHub
+
 ---
 
-## 📦 Installation
+## 📦 Installation Guide
 
-### ⚙️ Backend
+### ⚙️ Backend Setup
 
 ```bash
 cd backend
@@ -146,27 +143,19 @@ npm run dev
 
 ## 👤 Demo Credentials
 
-| Role  | Username | Password |
-| ----- | -------- | -------- |
-| Admin | admin    | admin123 |
-| User  | user     | user123  |
+### Admin
 
----
+```
+Username: admin
+Password: admin123
+```
 
-## 📸 UI PREVIEW
+### User
 
-
-### 🔐 Login Page
-
-![Login](./assets/img/signin.png)
-
-### 📊 Dashboard
-
-![Dashboard](./assets/img/dashboard.png)
-
-### 📈 Prediction View
-
-![Prediction](./assets/img/pred1.png)
+```
+Username: user
+Password: user123
+```
 
 ---
 
