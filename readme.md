@@ -1,4 +1,5 @@
-# 🛡️ FraudShield — AI-Powered Credit Card Fraud Detection System
+# 🛡️ FraudShield  
+### AI-Powered Credit Card Fraud Detection System
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
 ![Node](https://img.shields.io/badge/Node.js-18+-green?logo=node.js)
@@ -10,84 +11,92 @@
 
 ---
 
-## 🚀 Tagline
+## 🚀 Overview
 
-A real-time, full-stack AI system that detects fraudulent credit card transactions using machine learning, secure APIs, and an interactive analytics dashboard.
+FraudShield is a real-time AI-powered fraud detection system that analyzes credit card transactions using machine learning and provides instant risk scoring through a full-stack dashboard.
+
+> It simulates how real fintech fraud detection systems evaluate and block suspicious transactions.
 
 ---
 
-## 🧠 Project Overview
+## 🧠 Problem Statement
 
-FraudShield is a full-stack machine learning system designed to simulate and detect credit card fraud in real time.
+Credit card fraud causes massive financial losses globally.
 
-It combines:
-
-* A React-based analytics dashboard
-* A FastAPI backend serving ML predictions
-* A trained ML model for fraud scoring
-* Secure JWT authentication system
-* Transaction logging and audit trail
-
-### 🎯 Real-World Problem
-
-Credit card fraud causes billions in global financial losses annually. FraudShield demonstrates how AI systems can analyze transaction patterns and flag suspicious activity instantly before damage occurs.
+FraudShield demonstrates how AI can:
+- Detect suspicious patterns
+- Score transaction risk in real time
+- Automate fraud decisions (APPROVE / REVIEW / BLOCK)
 
 ---
 
 ## 🏗️ System Architecture
 
+### 🔷 High-Level Flow
+
 ```mermaid
 flowchart LR
-A[User] --> B[React Frontend]
-B --> C[FastAPI Backend]
-C --> D[Authentication Layer (JWT)]
-C --> E[ML Fraud Detection Model]
-E --> F[Decision Engine]
-F --> G[SQLite Database]
-G --> B
-```
+U[User] --> F[React Frontend]
+F --> B[FastAPI Backend]
+B --> A[Auth Layer (JWT)]
+B --> M[ML Model Engine]
+M --> D[Decision Engine]
+D --> DB[SQLite Database]
+DB --> F
+````
+
+---
+
+### 🔷 Architecture Breakdown
+
+| Layer        | Responsibility                     |
+| ------------ | ---------------------------------- |
+| 🎨 Frontend  | User dashboard + transaction input |
+| ⚙️ Backend   | API + business logic               |
+| 🤖 ML Model  | Fraud prediction engine            |
+| 🗄️ Database | Stores users + transactions        |
 
 ---
 
 ## 🔄 System Workflow
 
-```
-User Login
-   ↓
+```text
+Login
+  ↓
 JWT Authentication
-   ↓
-Transaction Input (Frontend)
-   ↓
+  ↓
+Enter Transaction
+  ↓
 API Request (FastAPI)
-   ↓
+  ↓
 Feature Processing
-   ↓
-ML Model Prediction
-   ↓
+  ↓
+ML Prediction
+  ↓
 Risk Scoring Engine
-   ↓
-Decision (APPROVE / REVIEW / BLOCK)
-   ↓
-Store in Database
-   ↓
-Update Dashboard UI
+  ↓
+Decision Output
+  ↓
+Database Storage
+  ↓
+UI Update
 ```
 
 ---
 
 ## ✨ Features
 
-* 🔐 Secure JWT Authentication (Role-based access)
-* 📊 Real-time fraud analytics dashboard
-* 🤖 Machine Learning prediction engine
-* 🧾 Transaction audit logs
-* 👮 Admin override controls
-* 📈 Interactive charts & metrics visualization
-* ⚡ Low-latency API inference system
+✔ Secure JWT Authentication
+✔ Role-based Access (Admin/User)
+✔ Real-time Fraud Prediction
+✔ ML-based Risk Scoring
+✔ Transaction Audit Logs
+✔ Interactive Dashboard Charts
+✔ Admin Override Controls
 
 ---
 
-## 🧰 Technology Stack
+## 🧰 Tech Stack
 
 ### 🎨 Frontend
 
@@ -101,31 +110,23 @@ Update Dashboard UI
 * FastAPI
 * Python
 * SQLAlchemy
-* Pydantic
-* JWT Authentication
+* JWT Auth
 
 ### 🤖 Machine Learning
 
 * Scikit-learn
 * XGBoost / Random Forest
-* Pandas
-* NumPy
+* NumPy / Pandas
 
 ### 🗄️ Database
 
 * SQLite
 
-### 🛠️ Tools
-
-* Docker (optional)
-* Postman
-* Git & GitHub
-
 ---
 
-## 📦 Installation Guide
+## 📦 Installation
 
-### ⚙️ Backend Setup
+### ⚙️ Backend
 
 ```bash
 cd backend
@@ -133,9 +134,7 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
----
-
-### 🎨 Frontend Setup
+### 🎨 Frontend
 
 ```bash
 cd frontend
@@ -147,43 +146,49 @@ npm run dev
 
 ## 👤 Demo Credentials
 
-### Admin
+| Role  | Username | Password |
+| ----- | -------- | -------- |
+| Admin | admin    | admin123 |
+| User  | user     | user123  |
 
-```
-Username: admin
-Password: admin123
-```
+---
 
-### User
+## 📸 UI PREVIEW
 
-```
-Username: user
-Password: user123
-```
+
+### 🔐 Login Page
+
+![Login](./assets/img/signin.png)
+
+### 📊 Dashboard
+
+![Dashboard](./assets/img/dashboard.png)
+
+### 📈 Prediction View
+
+![Prediction](./assets/img/pred1.png)
 
 ---
 
 ## ⚠️ Limitations
 
-* Uses synthetic dataset (not real banking data)
-* SQLite not suitable for large-scale production
-* ML model is static (no continuous retraining)
-* No distributed system support
-* Limited concurrency handling
+* Synthetic dataset (not real banking data)
+* SQLite not production-grade
+* No real-time model training
+* Basic concurrency handling
 
 ---
 
-## 📸 UI Preview
+## 📜 License
 
-* `/assets/img/signin.png`
-* `/assets/img/dashboard.png`
-* `/assets/img/pred1.png`
+MIT License © 2026 FraudShield
 
 ---
 
-## 👤 Credits & License
+## ❤️ Footer
 
-- **Built by:** Athrav Khandelwal
-- **License:** MIT License
+Built with ❤️ using AI + Full Stack Engineering
+
+````
 
 ---
