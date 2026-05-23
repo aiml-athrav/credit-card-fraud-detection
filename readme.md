@@ -11,6 +11,12 @@
 
 ---
 
+## 🌐 Live Demo
+
+👉 https://credit-card-fraud-detection-1-ch5z.onrender.com
+
+---
+
 ## 🚀 Overview
 
 FraudShield is a real-time AI-powered fraud detection system that analyzes credit card transactions using machine learning and provides instant risk scoring through a full-stack dashboard.
