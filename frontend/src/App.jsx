@@ -37,16 +37,16 @@ import {
   CartesianGrid
 } from 'recharts';
 
-const API_BASE_URL = 'http://localhost:8000/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function App() {
   // Auth state
   const [token, setToken] = useState(localStorage.getItem('token') || '');
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null);
-  
+
   // Navigation
   const [currentPage, setCurrentPage] = useState('dashboard');
-  
+
   // Login / Register Form states
   const [isLoginTab, setIsLoginTab] = useState(true);
   const [username, setUsername] = useState('');
@@ -55,7 +55,7 @@ export default function App() {
   const [role, setRole] = useState('user');
   const [authError, setAuthError] = useState('');
   const [authSuccess, setAuthSuccess] = useState('');
-  
+
   // Simulation Form states
   const [cardNumber, setCardNumber] = useState('');
   const [amount, setAmount] = useState('');
@@ -177,7 +177,7 @@ export default function App() {
     setSimError('');
     setPredictionResult(null);
     setSimLoading(true);
-    
+
     try {
       const res = await axios.post(`${API_BASE_URL}/transactions/predict`, {
         card_number: cardNumber,
@@ -185,13 +185,13 @@ export default function App() {
         merchant,
         profile
       });
-      
+
       setPredictionResult(res.data);
       // Reset form on success
       setCardNumber('');
       setAmount('');
       setMerchant('');
-      
+
       // Update global states
       fetchMetrics();
       fetchHistory();
@@ -248,17 +248,15 @@ export default function App() {
           <div className="flex space-x-4 mb-6 border-b border-slate-800 pb-2">
             <button
               onClick={() => { setIsLoginTab(true); setAuthError(''); setAuthSuccess(''); }}
-              className={`flex-1 pb-3 text-sm font-semibold border-b-2 transition-all ${
-                isLoginTab ? 'text-cyan-400 border-cyan-400' : 'text-slate-400 border-transparent hover:text-slate-200'
-              }`}
+              className={`flex-1 pb-3 text-sm font-semibold border-b-2 transition-all ${isLoginTab ? 'text-cyan-400 border-cyan-400' : 'text-slate-400 border-transparent hover:text-slate-200'
+                }`}
             >
               Sign In
             </button>
             <button
               onClick={() => { setIsLoginTab(false); setAuthError(''); setAuthSuccess(''); }}
-              className={`flex-1 pb-3 text-sm font-semibold border-b-2 transition-all ${
-                !isLoginTab ? 'text-cyan-400 border-cyan-400' : 'text-slate-400 border-transparent hover:text-slate-200'
-              }`}
+              className={`flex-1 pb-3 text-sm font-semibold border-b-2 transition-all ${!isLoginTab ? 'text-cyan-400 border-cyan-400' : 'text-slate-400 border-transparent hover:text-slate-200'
+                }`}
             >
               Register
             </button>
@@ -387,7 +385,7 @@ export default function App() {
               </button>
             </form>
           )}
-          
+
           <div className="mt-6 pt-4 border-t border-slate-900 text-center text-xs text-slate-500 font-medium">
             FraudShield Dev Seed Environment V1.0.0
           </div>
@@ -426,11 +424,10 @@ export default function App() {
               <div className="overflow-hidden">
                 <h4 className="text-xs font-bold text-slate-200 truncate">{user.username}</h4>
                 <div className="flex items-center space-x-1 mt-1">
-                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase ${
-                    user.role === 'admin' 
-                      ? 'bg-violet-500/10 border border-violet-500/30 text-violet-400 shadow-[0_0_10px_rgba(139,92,246,0.1)]' 
-                      : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400'
-                  }`}>
+                  <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold uppercase ${user.role === 'admin'
+                    ? 'bg-violet-500/10 border border-violet-500/30 text-violet-400 shadow-[0_0_10px_rgba(139,92,246,0.1)]'
+                    : 'bg-cyan-500/10 border border-cyan-500/30 text-cyan-400'
+                    }`}>
                     {user.role}
                   </span>
                 </div>
@@ -442,11 +439,10 @@ export default function App() {
           <nav className="px-4 space-y-1.5">
             <button
               onClick={() => setCurrentPage('dashboard')}
-              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                currentPage === 'dashboard'
-                  ? 'bg-cyan-500/10 border-l-4 border-cyan-400 text-cyan-300'
-                  : 'text-slate-400 hover:bg-slate-900/50 hover:text-slate-200 border-l-4 border-transparent'
-              }`}
+              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${currentPage === 'dashboard'
+                ? 'bg-cyan-500/10 border-l-4 border-cyan-400 text-cyan-300'
+                : 'text-slate-400 hover:bg-slate-900/50 hover:text-slate-200 border-l-4 border-transparent'
+                }`}
             >
               <TrendingUp className="w-4 h-4" />
               <span>Metrics Console</span>
@@ -454,11 +450,10 @@ export default function App() {
 
             <button
               onClick={() => setCurrentPage('simulate')}
-              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                currentPage === 'simulate'
-                  ? 'bg-cyan-500/10 border-l-4 border-cyan-400 text-cyan-300'
-                  : 'text-slate-400 hover:bg-slate-900/50 hover:text-slate-200 border-l-4 border-transparent'
-              }`}
+              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${currentPage === 'simulate'
+                ? 'bg-cyan-500/10 border-l-4 border-cyan-400 text-cyan-300'
+                : 'text-slate-400 hover:bg-slate-900/50 hover:text-slate-200 border-l-4 border-transparent'
+                }`}
             >
               <Sliders className="w-4 h-4" />
               <span>Predict Simulator</span>
@@ -466,11 +461,10 @@ export default function App() {
 
             <button
               onClick={() => setCurrentPage('history')}
-              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${
-                currentPage === 'history'
-                  ? 'bg-cyan-500/10 border-l-4 border-cyan-400 text-cyan-300'
-                  : 'text-slate-400 hover:bg-slate-900/50 hover:text-slate-200 border-l-4 border-transparent'
-              }`}
+              className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all ${currentPage === 'history'
+                ? 'bg-cyan-500/10 border-l-4 border-cyan-400 text-cyan-300'
+                : 'text-slate-400 hover:bg-slate-900/50 hover:text-slate-200 border-l-4 border-transparent'
+                }`}
             >
               <History className="w-4 h-4" />
               <span>Audit Ledger</span>
@@ -492,7 +486,7 @@ export default function App() {
 
       {/* Main Content Area */}
       <main className="flex-1 p-6 md:p-8 overflow-y-auto max-w-7xl">
-        
+
         {/* =================================------------------
             PAGE VIEW: DASHBOARD
             =================================------------------ */}
@@ -610,7 +604,7 @@ export default function App() {
                         <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
                         <XAxis dataKey="merchant" stroke="#475569" fontSize={10} tickLine={false} />
                         <YAxis stroke="#475569" fontSize={10} tickLine={false} />
-                        <Tooltip 
+                        <Tooltip
                           contentStyle={{ background: '#0f172a', borderColor: '#1e293b', borderRadius: '12px' }}
                           formatter={(value) => [`$${value}`, 'Amount']}
                         />
@@ -744,30 +738,27 @@ export default function App() {
                 {predictionResult ? (
                   <div className="glass-panel p-6 rounded-3xl border border-slate-800 relative overflow-hidden">
                     {/* Visual Backdrop Rings */}
-                    <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl -z-10 opacity-30 ${
-                      predictionResult.status === 'APPROVED' ? 'bg-emerald-500' :
+                    <div className={`absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl -z-10 opacity-30 ${predictionResult.status === 'APPROVED' ? 'bg-emerald-500' :
                       predictionResult.status === 'REVIEW' ? 'bg-amber-500' : 'bg-rose-500'
-                    }`}></div>
+                      }`}></div>
 
                     <h3 className="text-xl font-bold text-white mb-4">Inference Response Result</h3>
-                    
+
                     <div className="flex items-center space-x-4 mb-6">
-                      <div className={`p-4 rounded-2xl border ${
-                        predictionResult.status === 'APPROVED' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' :
+                      <div className={`p-4 rounded-2xl border ${predictionResult.status === 'APPROVED' ? 'bg-emerald-500/10 border-emerald-500/30 text-emerald-400' :
                         predictionResult.status === 'REVIEW' ? 'bg-amber-500/10 border-amber-500/30 text-amber-400' :
-                        'bg-rose-500/10 border-rose-500/30 text-rose-400'
-                      }`}>
+                          'bg-rose-500/10 border-rose-500/30 text-rose-400'
+                        }`}>
                         {predictionResult.status === 'APPROVED' ? <ShieldCheck className="w-8 h-8" /> :
-                         predictionResult.status === 'REVIEW' ? <AlertTriangle className="w-8 h-8" /> :
-                         <XCircle className="w-8 h-8" />}
+                          predictionResult.status === 'REVIEW' ? <AlertTriangle className="w-8 h-8" /> :
+                            <XCircle className="w-8 h-8" />}
                       </div>
                       <div>
                         <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Evaluation Audit status</span>
-                        <h2 className={`text-2xl font-extrabold tracking-wide uppercase ${
-                          predictionResult.status === 'APPROVED' ? 'text-emerald-400' :
+                        <h2 className={`text-2xl font-extrabold tracking-wide uppercase ${predictionResult.status === 'APPROVED' ? 'text-emerald-400' :
                           predictionResult.status === 'REVIEW' ? 'text-amber-400' :
-                          'text-rose-400'
-                        }`}>
+                            'text-rose-400'
+                          }`}>
                           {predictionResult.status}
                         </h2>
                       </div>
@@ -794,18 +785,17 @@ export default function App() {
                         <Info className="w-4 h-4 text-cyan-400" />
                         <span>PCA Feature Dimensions Log</span>
                       </div>
-                      
+
                       <div className="max-h-36 overflow-y-auto grid grid-cols-3 gap-2 pr-1">
-                        {predictionResult.prediction.features && 
+                        {predictionResult.prediction.features &&
                           Object.entries(predictionResult.prediction.features)
                             .filter(([key]) => key.startsWith('V'))
                             .slice(0, 15)
                             .map(([key, val]) => (
                               <div key={key} className="bg-slate-900/60 border border-slate-850 p-2 rounded-xl text-center">
                                 <span className="text-[10px] text-slate-500 font-bold block">{key}</span>
-                                <span className={`text-xs font-semibold ${
-                                  val < -2.0 ? 'text-rose-400' : val > 2.0 ? 'text-emerald-400' : 'text-slate-300'
-                                }`}>
+                                <span className={`text-xs font-semibold ${val < -2.0 ? 'text-rose-400' : val > 2.0 ? 'text-emerald-400' : 'text-slate-300'
+                                  }`}>
                                   {val.toFixed(4)}
                                 </span>
                               </div>
@@ -900,11 +890,10 @@ export default function App() {
                             {row.prediction ? `${(row.prediction.probability * 100.0).toFixed(1)}%` : 'N/A'}
                           </td>
                           <td className="py-4 px-6 text-center whitespace-nowrap">
-                            <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase ${
-                              row.status === 'APPROVED' ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' :
+                            <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold uppercase ${row.status === 'APPROVED' ? 'bg-emerald-500/10 border border-emerald-500/20 text-emerald-400' :
                               row.status === 'REVIEW' ? 'bg-amber-500/10 border border-amber-500/20 text-amber-400' :
-                              'bg-rose-500/10 border border-rose-500/20 text-rose-400'
-                            }`}>
+                                'bg-rose-500/10 border border-rose-500/20 text-rose-400'
+                              }`}>
                               {row.status}
                             </span>
                           </td>
